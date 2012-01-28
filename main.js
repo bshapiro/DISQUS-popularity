@@ -6,6 +6,8 @@ var totalCount = 0;
 
 $(document).ready(function () {
 	
+	
+	/** interactive functionalities and image hovers **/
 	$("#analyze").click(function() {
 		var forumName = $("#forumName").val();
 		if (forumName != "") {
@@ -75,6 +77,7 @@ function processForum(data, forumName) {
 }
 
 function processUsers(userIDArray, index, wordArray) {
+	//list posts given the user array
 	if (index < userIDArray.length) {
 		$.ajax({
 			url: "https://disqus.com/api/3.0/users/listPosts.jsonp?",
@@ -82,29 +85,29 @@ function processUsers(userIDArray, index, wordArray) {
 					api_secret: "wQ2624dAWkU1SQ2x2uxrnCJH7ySQqczsz4RQwyzUihIANPE0O0eFiiMdSeN3NcPN",
 					limit: "100"},
 			success: function(data) {
-									data = data.response;
-									data.forEach(
-										function(post) {
-											post.raw_message.split(" ").forEach(
-												function(word) {
-													/** condense word **/
-													word = word.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~() "\n]/g,"");
-													word = word.replace(/\s{2,}/g," ");
-													word = word.toLowerCase();
-													if ($.inArray(word, stopWords) == -1) {
-														if (wordArray[word]) {
-															wordArray[word] += 1;
-														} else {
-															wordArray[word] = 1;
-														}
-													}
-												}
-											);
-										}
-									);
-									index++;
-									processUsers(userIDArray, index, wordArray);
-									},
+				data = data.response;
+				data.forEach(
+					function(post) {
+						post.raw_message.split(" ").forEach(
+							function(word) {
+								/** condense word **/
+								word = word.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~() "\n]/g,"");
+								word = word.replace(/\s{2,}/g," ");
+								word = word.toLowerCase();
+								if ($.inArray(word, stopWords) == -1) {
+									if (wordArray[word]) {
+										wordArray[word] += 1;
+									} else {
+										wordArray[word] = 1;
+									}
+								}
+							}
+						);
+					}
+				);
+				index++;
+				processUsers(userIDArray, index, wordArray);
+				},
 			dataType: "jsonp"
 		});
 	} else {
@@ -135,11 +138,13 @@ function Analyze(wordArray) {
 			myString += key + ": " + value + "\n"
 		}
 	}
+	
+	//set gobal variable
 	wordCounts = wordArray;
 	updatePage(myString);
 }
 
-function updatePage(myString) {
+function updatePage(myString) {}
 	$("#loading").attr("style", "display: none;");
 	$("#output").attr("style", "");
 	$("#output").attr("value", myString);
