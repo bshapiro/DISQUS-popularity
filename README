@@ -42,7 +42,4 @@ and
 
 "I like cats."
 
-then the latter will naturally get a much higher ranking because the results have not been normalized relative to comment length (sorry about that!). 
-
-
-Sorry for all the text! Thanks!
+then the latter will naturally get a much higher ranking because the results have not been normalized relative to comment length. 
