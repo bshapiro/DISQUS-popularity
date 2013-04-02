@@ -1,3 +1,7 @@
+This is a small project (written in about ~5 hours) built for a day-long interview at DISQUS, Inc (http://www.disqus.com). 
+
+
+
 Some notes on this project:
 
 1. This project allows the user to input a forum, generates the most popular terms in the forum, and then ranks a comment provided by the user as more or less popular. Note that clicking the final button does not produce a visible result; due to time restrictions, I did not have a chance to get some of the last steps done. However, a ranking is logged in the console when the user clicks "How popular is my comment?". 
